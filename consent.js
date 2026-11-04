@@ -37,10 +37,9 @@
   function css() {
     if (document.getElementById('glc-css')) return;
     var st = document.createElement('style'); st.id = 'glc-css';
-    st.textContent = '#glc{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;max-width:640px;margin:0 auto;background:var(--surface,#fff);color:var(--ink,#0d2a1f);border:1px solid var(--line,#e2ded2);border-radius:18px;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.35);font:400 15px/1.5 Inter,system-ui,sans-serif}' +
-      '#glc p{margin:0 0 14px}#glc a{color:inherit;text-underline-offset:3px}#glc .r{display:flex;gap:10px;flex-wrap:wrap}' +
-      '#glc button{flex:1;min-width:120px;border:1px solid var(--line,#e2ded2);border-radius:999px;padding:11px 18px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;background:var(--bg,#f6f4ee);color:var(--ink,#0d2a1f)}' +
-      '#glc button.y{background:var(--accent,#d4f542);color:#0d2a1f;border-color:var(--accent,#d4f542)}#glc button:focus-visible{outline:2px solid var(--ink,#0d2a1f);outline-offset:2px}';
+    st.textContent = '#glc{position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;max-width:560px;margin:0 auto;background:var(--surface,#fff);color:var(--ink,#0d2a1f);border:1px solid var(--line,#e2ded2);border-radius:16px;padding:14px 16px;box-shadow:0 12px 40px rgba(0,0,0,.3);font:400 15px/1.45 Inter,system-ui,sans-serif;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}' +
+      '#glc p{margin:0;flex:1 1 240px}#glc a{color:inherit;text-underline-offset:3px;white-space:nowrap}#glc .r{display:flex;gap:8px;flex:0 0 auto}' +
+      '#glc button{min-width:96px;min-height:44px;border:1.5px solid var(--ink,#0d2a1f);border-radius:999px;padding:8px 18px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;background:var(--surface,#fff);color:var(--ink,#0d2a1f)}#glc button:hover{background:var(--bg,#f6f4ee)}#glc button:focus-visible{outline:2px solid var(--ink,#0d2a1f);outline-offset:2px}';
     document.head.appendChild(st);
   }
   function close() { var b = document.getElementById('glc'); if (b) b.remove(); }
@@ -48,7 +47,7 @@
     if (document.getElementById('glc')) return;
     css();
     var b = document.createElement('div'); b.id = 'glc'; b.setAttribute('role', 'dialog'); b.setAttribute('aria-label', 'Cookies');
-    b.innerHTML = '<p>On mesure l\'audience du site avec Google Analytics pour l\'améliorer. Sans ton accord, aucun cookie n\'est déposé et seules des données anonymes sont envoyées. Avec ton accord, les statistiques sont plus complètes. Pas de publicité, pas de revente. <a href="/privacy#cookies">En savoir plus</a></p>' +
+    b.innerHTML = '<p>On mesure les visites avec Google Analytics. Tu choisis. <a href="/privacy#cookies">En savoir plus</a></p>' +
       '<div class="r"><button type="button" class="n">Refuser</button><button type="button" class="y">Accepter</button></div>';
     b.querySelector('.y').onclick = function () { save(true); apply(true); close(); };
     b.querySelector('.n').onclick = function () { save(false); apply(false); close(); };
