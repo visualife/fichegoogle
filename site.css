@@ -1,17 +1,41 @@
 /* Googlow : socle commun à toutes les pages (couleurs, typo, en-tête, boutons, cartes, icônes, pied de page).
    Chaque page garde dans son <style> uniquement ce qui lui est propre. */
 
-/* Petit Formal Script (SIL OFL 1.1, voir /fonts/OFL.txt), hébergée ici et préchargée : le grand titre s'affiche plus vite. */
-@font-face{font-family:'Petit Formal Script';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/petit-formal-script-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Petit Formal Script';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/petit-formal-script-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* Typographie « L8 » du Color & Type Lab : Gilda Display 400 (titres) + Hanken Grotesk variable (texte, graisse 300).
+   Polices hébergées ici (SIL OFL 1.1, voir /fonts/OFL-*.txt) et préchargées. */
+@font-face{font-family:"Gilda Display";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/gilda-display-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gilda Display";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/gilda-display-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:100 900;font-display:swap;src:url("/fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:100 900;font-display:swap;src:url("/fonts/hanken-grotesk-latin-ext-wght-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+/* Polices de secours ajustées (moins de décalage au chargement) */
+@font-face{font-family:"Gilda Display Fallback";src:local("Times New Roman");size-adjust:111.1%;ascent-override:80.3%;descent-override:25.7%;line-gap-override:0%;}
+@font-face{font-family:"Hanken Grotesk Fallback";src:local("Arial");size-adjust:100.9%;ascent-override:99.1%;descent-override:30%;line-gap-override:0%;}
+
 :root{
   --bg:#f6f4ee; --surface:#fff; --ink:#0d2a1f; --muted:#5a6b62; --line:#e2ded2;
   --brand:#0d2a1f; --accent:#d4f542; --accent-ink:#0d2a1f; --warn:#ff7a3d; --warn-text:#b94612;
   --err:#c2362b; --ok:#1f7a3d;
+  /* Noms des rôles du Color & Type Lab (palette Moss Dark). En clair, valeurs dérivées de la palette existante. */
+  --surface-2:#efece3; --border:#e2ded2; --border-strong:#8a948e; --text-muted:#5a6b62;
+  --primary:#d4f542; --on-primary:#0d2a1f; --accent-amber:#b94612; --on-accent:#fff;
+  --success:#1f7a3d; --warning:#8a5a00; --error:#c2362b; --info:#1d5fbf;
+  /* États (mélanges « standard » du Lab) */
+  --primary-hover:color-mix(in oklab,var(--primary),black 12%);
+  --primary-active:color-mix(in oklab,var(--primary),black 20%);
+  --primary-disabled:color-mix(in oklab,var(--primary),var(--bg) 60%);
+  --selected:color-mix(in oklab,var(--surface),var(--primary) 10%);
+  --success-tint:color-mix(in oklab,var(--surface),var(--success) 10%);
+  --warning-tint:color-mix(in oklab,var(--surface),var(--warning) 10%);
+  --error-tint:color-mix(in oklab,var(--surface),var(--error) 10%);
+  --info-tint:color-mix(in oklab,var(--surface),var(--info) 10%);
   --r:20px; --gutter:20px;
-  --display:'Petit Formal Script','Bricolage Grotesque',Georgia,serif;
-  --head:'Bricolage Grotesque',Inter,system-ui,sans-serif;
-  --text:Inter,system-ui,sans-serif;
+  --font-heading:"Gilda Display","Gilda Display Fallback",ui-serif,Georgia,"Times New Roman",serif;
+  --font-body:"Hanken Grotesk","Hanken Grotesk Fallback",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --weight-heading:400; --weight-body:300; --tracking-heading:-.01em; --tracking-caps:.16em; --measure:62ch;
+  /* échelle : base 17 px, ratio 1,25 */
+  --step-n2:.68rem; --step-n1:.85rem; --step-0:1.063rem; --step-1:1.328rem; --step-2:1.66rem; --step-3:2.075rem; --step-4:2.594rem; --step-5:3.243rem; --step-6:4.053rem;
+  /* noms historiques du site */
+  --display:var(--font-heading); --head:var(--font-heading); --text:var(--font-body);
   /* icônes utilisées en masque CSS (puces de liste) : la couleur vient de background-color */
   --m-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E");
   --m-x:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E");
@@ -20,25 +44,36 @@
   --m-minus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M5.5 12h13'/%3E%3C/svg%3E");
   color-scheme:light dark;
 }
+/* Sombre : palette « Moss Dark » du Color & Type Lab, valeurs hexadécimales exactes.
+   Le rôle « text » du Lab s'appelle --ink ici (--text est déjà la police) ; le rôle « accent » (ambre) s'appelle --accent-amber
+   (--accent désigne la couleur d'action principale du site, donc le « primary » du Lab). */
 @media (prefers-color-scheme:dark){
-  :root{--bg:#0a1812;--surface:#112419;--ink:#eef3ec;--muted:#98aa9f;--line:#1f3a2c;--brand:#d4f542;--accent:#d4f542;--accent-ink:#0d2a1f;--warn-text:#ff8f5c;--err:#ff8a80;--ok:#7be0a0}
+  :root{
+    --bg:#09110C; --surface:#0E1913; --surface-2:#14231B; --border:#1B2B22; --border-strong:#485D4F;
+    --ink:#A7B1A9; --text-muted:#6C7F72;
+    --primary:#8FC79A; --on-primary:#141A16; --accent-amber:#D9A86C; --on-accent:#141A16;
+    --success:#4ADE80; --warning:#FBBF24; --error:#F87171; --info:#60A5FA;
+    /* noms historiques du site, branchés sur les rôles */
+    --muted:var(--text-muted); --line:var(--border); --brand:var(--primary); --accent:var(--primary); --accent-ink:var(--on-primary);
+    --warn:var(--accent-amber); --warn-text:var(--accent-amber); --err:var(--error); --ok:var(--success);
+  }
 }
 @media (max-width:400px){:root{--gutter:16px}}
 
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font:400 17px/1.55 var(--text);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-synthesis:none}
+body{font:var(--weight-body) 17px/1.6 var(--font-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
 img,svg,canvas{max-width:100%}
 img{height:auto}
 a{color:inherit;text-underline-offset:3px}
 [hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Titres. Le script (Petit Formal Script) n'a qu'une graisse : pas de faux gras, pas d'approche négative. */
-h1,h2,h3,.logo{font-family:var(--head);letter-spacing:-.02em;line-height:1.08}
-h1,.disp{font-family:var(--display);font-weight:400;font-synthesis:none;letter-spacing:0;line-height:1.22;text-wrap:balance;padding-inline:.08em}
+/* Titres : Gilda Display n'a qu'une graisse (400) : pas de faux gras ; approche légère -0,01em */
+h1,h2,h3,.logo{font-family:var(--font-heading);font-weight:var(--weight-heading);letter-spacing:var(--tracking-heading);line-height:1.15}
+h1,.disp{text-wrap:balance}
 h1 em,.disp em{font-style:normal}
-h3{font-weight:700}
+main>p,main>ul{max-width:var(--measure)}
 
 .wrap{max-width:1120px;margin:0 auto;padding:0 var(--gutter)}
 
@@ -51,10 +86,18 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border:1px solid transparent;border-radius:999px;padding:12px 24px;font:600 16px/1.2 var(--text);cursor:pointer;text-decoration:none;text-align:center;transition:transform .15s,box-shadow .15s,border-color .15s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px -10px rgba(13,42,31,.45)}
 .btn:disabled{opacity:.6;cursor:wait;transform:none}
-.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn[aria-busy=true]{cursor:progress}
+/* Hiérarchie : primaire (rempli), secondaire (sombre), contour, tertiaire (texte) */
+.btn-primary{background:var(--primary);color:var(--on-primary)}
+.btn-primary:hover{background:var(--primary-hover)}
+.btn-primary:active{background:var(--primary-active);transform:none;box-shadow:none}
+.btn-primary:disabled,.btn-primary[aria-disabled=true]{background:var(--primary-disabled);color:var(--text-muted);opacity:1;box-shadow:none}
 .btn-dark{background:var(--ink);color:var(--bg)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn-ghost:hover{border-color:var(--ink)}
+.btn-dark:active,.btn-ghost:active{transform:none;box-shadow:none}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--border-strong)}
+.btn-ghost:hover{border-color:var(--ink);background:var(--selected)}
+.btn-text{background:transparent;color:var(--ink);border-color:transparent;text-decoration:underline;text-underline-offset:4px;padding-inline:10px;min-height:44px}
+.btn-text:hover{background:var(--selected);box-shadow:none}
 .btn .ico{width:20px;height:20px}
 .check:focus-within{outline:3px solid var(--warn);outline-offset:3px}
 a:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--warn);outline-offset:3px}
@@ -65,7 +108,7 @@ a:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,text
 .stars .ico{width:16px;height:16px}
 
 /* Surtitre : phrase courte, pas de capitales */
-.eyebrow{display:block;font:600 15px/1.3 var(--text);color:var(--warn-text);margin-bottom:6px}
+.eyebrow{display:block;font:600 13px/1.3 var(--text);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--warn-text);margin-bottom:10px}
 
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
 @media (min-width:700px){.card{padding:28px}}
